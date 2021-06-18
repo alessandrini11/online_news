@@ -3,12 +3,16 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use ApiPlatform\Core\Annotation,ApiRessource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
+ * @ORM\Entity
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
+ * @ApiRessource
  */
 class Article
 {
