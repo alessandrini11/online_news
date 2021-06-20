@@ -2,8 +2,8 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ArticleRepository;
-use ApiPlatform\Core\Annotation,ApiRessource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
- * @ApiRessource
+ * @ApiResource()
  */
 class Article
 {
@@ -20,41 +20,49 @@ class Article
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"read:article"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:article"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"read:article"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:article"})
      */
     private $url;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:article"})
      */
     private $img;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"read:article"})
      */
     private $created_at;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"read:article"})
      */
     private $content;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="articles")
+     *@Groups({"read:article"})
      */
     private $user;
 

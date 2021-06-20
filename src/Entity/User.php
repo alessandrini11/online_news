@@ -17,25 +17,21 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups("article:read")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("article:read")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("article:read")
      */
     private $pseudo;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("article:read")
      */
     private $password;
 
