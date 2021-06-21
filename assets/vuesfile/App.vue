@@ -10,12 +10,6 @@
         name: "App",
         components : {
             Home : Home
-        },
-        data : () =>({
-            counter : 0
-        }),
-        mounted() {
-
         }
     }
 </script>

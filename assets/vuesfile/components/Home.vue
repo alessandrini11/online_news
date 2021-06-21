@@ -33,69 +33,34 @@
                 <!-- container flex -->
                 <div class="md:flex ">
                     <!-- article items -->
-                    <div class="flex justify-between mb-5">
-                        <div class="relative ">
-                            <div class="h-80 bg-gradient-to-t to-transparent from-black ">
-                                <img class="h-full w-full object-cover rounded-xl" src="../components/1.jpg" alt="">
-                            </div>
-                            <span class="absolute top-5 left-5 bg-blue-800 text-white text-sm py-1 px-2 rounded">CODING</span>
-                            <div class="absolute bottom-2 left-5">
-                                <p class="text-2xl font-bold text-white">Is the designer facing extinction?</p>
-                                <p class="text-gray-300 text-sm">
-                                    <span class="mr-5"><i class="fa fa-user mr-1 text-pink-700"></i>author</span>
-                                    <span><i class="fas fa-clock mr-1 text-pink-700"></i> date</span>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="relative ml-3">
-                            <div class="h-80 bg-gradient-to-tr from-black">
-                                <img class="h-full w-full object-cover rounded-xl" src="../components/1.jpg" alt="">
-                            </div>
-                            <span class="absolute top-5 left-5 bg-blue-800 text-white text-sm py-1 px-2 rounded">CODING</span>
-                            <div class="absolute bottom-2 left-5">
-                                <p class="text-2xl font-bold text-white">Is the designer facing extinction?</p>
-                                <p class="text-gray-300 text-sm">
-                                    <span class="mr-5"><i class="fa fa-user mr-1 text-pink-700"></i>author</span>
-                                    <span><i class="fas fa-clock mr-1"></i> date</span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="grid gap-3 mb-5  ">
-                        <div class="py-2 px-3 bg-white">
-                            <div class="flex ">
-                                <div class="h-20 w-1/4">
-                                    <img class="h-full w-full object-cover" src="../components/1.jpg" alt="">
+                        <div class="flex justify-between mb-5">
+                            <div v-for="(post,key) in limited" class="relative ">
+                                <div class="h-80 bg-gradient-to-t to-transparent from-black ">
+                                    <img class="h-full w-full object-cover rounded-xl" src="../components/1.jpg" alt="">
                                 </div>
-                                <div class="bg-white pl-5">
-                                    <p class="font-bold">how to choose the right hosting for your blog</p>
-                                    <p class="text-gray-400 text-sm"><i class="far fa-clock mr-1 text-pink-700"></i>date</p>
+                                <span class="absolute top-5 left-5 bg-blue-800 text-white text-sm py-1 px-2 rounded">CODING</span>
+                                <div class="absolute bottom-2 left-5">
+                                    <p class="text-2xl font-bold text-white">{{post.title}}</p>
+                                    <p class="text-gray-300 text-sm">
+                                        <span class="mr-5"><i class="fa fa-user mr-1 text-pink-700"></i> {{post.author}}</span>
+                                        <span><i class="fas fa-clock mr-1 text-pink-700"></i> {{post.publishedAt}}</span>
+                                    </p>
                                 </div>
                             </div>
                         </div>
-                        <div class="py-2 px-3 bg-white">
-                            <div class="flex ">
-                                <div class="h-20 w-1/4">
-                                    <img class="h-full w-full object-cover" src="../components/1.jpg" alt="">
-                                </div>
-                                <div class="bg-white pl-5">
-                                    <p class="font-bold">how to choose the right hosting for your blog</p>
-                                    <p class="text-gray-400 text-sm"><i class="far fa-clock mr-1 text-pink-700"></i>date</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="py-2 px-3 bg-white">
-                            <div class="flex ">
-                                <div class="h-20 w-1/4">
-                                    <img class="h-full w-full object-cover" src="../components/1.jpg" alt="">
-                                </div>
-                                <div class="bg-white pl-5">
-                                    <p class="font-bold">how to choose the right hosting for your blog</p>
-                                    <p class="text-gray-400 text-sm"><i class="far fa-clock mr-1 text-pink-700"></i>date</p>
+                        <div class="grid gap-3 mb-5  ">
+                            <div v-for="(post,key) in limitedThree " class="py-2 px-3 bg-white">
+                                <div class="flex ">
+                                    <div class="h-20 w-1/4">
+                                        <img class="h-full w-full object-cover" src="../components/1.jpg" alt="">
+                                    </div>
+                                    <div class="bg-white pl-5">
+                                        <p class="font-bold">{{post.title}}</p>
+                                        <p class="text-gray-400 text-sm"><i class="far fa-clock mr-1 text-pink-700"></i>{{post.publishedAt}}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -114,11 +79,11 @@
                     <div class="md:flex-grow grid sm:grid-cols-2 md:gap-3 gap-5 mb-5 md:w-2/3">
                         <div v-for="(post,key) in posts" class="bg-white relative py-3 px-4">
                             <div class="h-36 ">
-                                <img class="w-full h-full object-cover" src="../components/1.jpg" alt="">
+                                <img class="w-full h-full object-cover" :src="post.urlImage" alt="">
                             </div>
                             <span class="absolute top-5 left-5 bg-blue-800 text-white py-1 px-2 rounded text-sm">CODING</span>
                             <div class="">
-                                <p class="text-xl font-bold"><a :href="post.urlToImage">{{post.title}}</a></p>
+                                <p class="text-sm font-bold"><a :href="post.urlToImage">{{post.title.substring(0,10)}}</a></p>
                                 <p class="text-xs text-gray-400 py-2">
                                     <span><i class="fa fa-user text-pink-600 mr-1"></i>{{post.author}}</span>
                                     <span><i class="far fa-clock"></i>{{ post.publishedAt }}</span>
@@ -127,66 +92,6 @@
                                 <a href="" class="py-1 px-3 bg-black text-white">Read More</a>
                             </div>
                         </div>
-<!--                        <div class="bg-white relative py-3 px-4">-->
-<!--                            <div class="h-36 ">-->
-<!--                                <img class="w-full h-full object-cover" src="../components/1.jpg" alt="">-->
-<!--                            </div>-->
-<!--                            <span class="absolute top-5 left-5 bg-blue-800 text-white py-1 px-2 rounded text-sm">CODING</span>-->
-<!--                            <div class="">-->
-<!--                                <p class="text-xl font-bold">Lorem ipsum dolor sit amet consectetur adipisicing.</p>-->
-<!--                                <p class="text-xs text-gray-400 py-2">-->
-<!--                                    <span><i class="fa fa-user text-pink-600 mr-1"></i>author</span>-->
-<!--                                    <span><i class="far fa-clock"></i>date</span>-->
-<!--                                </p>-->
-<!--                                <p class="text-gray-500 mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto aliquid veritatis dolor delectus provident excepturi.</p>-->
-<!--                                <a href="" class="py-1 px-3 bg-black text-white">Read More</a>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="bg-white relative py-3 px-4">-->
-<!--                            <div class="h-36 ">-->
-<!--                                <img class="w-full h-full object-cover" src="../components/1.jpg" alt="">-->
-<!--                            </div>-->
-<!--                            <span class="absolute top-5 left-5 bg-blue-800 text-white py-1 px-2 rounded text-sm">CODING</span>-->
-<!--                            <div class="">-->
-<!--                                <p class="text-xl font-bold">Lorem ipsum dolor sit amet consectetur adipisicing.</p>-->
-<!--                                <p class="text-xs text-gray-400 py-2">-->
-<!--                                    <span><i class="fa fa-user text-pink-600 mr-1"></i>author</span>-->
-<!--                                    <span><i class="far fa-clock"></i>date</span>-->
-<!--                                </p>-->
-<!--                                <p class="text-gray-500 mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto aliquid veritatis dolor delectus provident excepturi.</p>-->
-<!--                                <a href="" class="py-1 px-3 bg-black text-white">Read More</a>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="bg-white relative py-3 px-4">-->
-<!--                            <div class="h-36 ">-->
-<!--                                <img class="w-full h-full object-cover" src="../components/1.jpg" alt="">-->
-<!--                            </div>-->
-<!--                            <span class="absolute top-5 left-5 bg-blue-800 text-white py-1 px-2 rounded text-sm">CODING</span>-->
-<!--                            <div class="">-->
-<!--                                <p class="text-xl font-bold">Lorem ipsum dolor sit amet consectetur adipisicing.</p>-->
-<!--                                <p class="text-xs text-gray-400 py-2">-->
-<!--                                    <span><i class="fa fa-user text-pink-600 mr-1"></i>author</span>-->
-<!--                                    <span><i class="far fa-clock"></i>date</span>-->
-<!--                                </p>-->
-<!--                                <p class="text-gray-500 mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto aliquid veritatis dolor delectus provident excepturi.</p>-->
-<!--                                <a href="" class="py-1 px-3 bg-black text-white">Read More</a>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="bg-white relative py-3 px-4">-->
-<!--                            <div class="h-36 ">-->
-<!--                                <img class="w-full h-full object-cover" src="../components/1.jpg" alt="">-->
-<!--                            </div>-->
-<!--                            <span class="absolute top-5 left-5 bg-blue-800 text-white py-1 px-2 rounded text-sm">CODING</span>-->
-<!--                            <div class="">-->
-<!--                                <p class="text-xl font-bold">Lorem ipsum dolor sit amet consectetur adipisicing.</p>-->
-<!--                                <p class="text-xs text-gray-400 py-2">-->
-<!--                                    <span><i class="fa fa-user text-pink-600 mr-1"></i>author</span>-->
-<!--                                    <span><i class="far fa-clock"></i>date</span>-->
-<!--                                </p>-->
-<!--                                <p class="text-gray-500 mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto aliquid veritatis dolor delectus provident excepturi.</p>-->
-<!--                                <a href="" class="py-1 px-3 bg-black text-white">Read More</a>-->
-<!--                            </div>-->
-<!--                        </div>-->
                     </div>
                     <!-- aside -->
                     <div class="w-full md:w-1/3 md:ml-2">
@@ -389,7 +294,8 @@
         data () {
             return {
                 posts : [],
-                img : '../components/1.jpg',
+                limitedTwo : [],
+                limited3 : [],
             }
         },
         filters:{
@@ -398,11 +304,21 @@
                 return  value + '...';
             }
         },
+        computed:{
+            limited(){
+                return this.limitedTwo.slice(0,2)
+            },
+            limitedThree(){
+                return this.limited3.slice(0,3)
+            }
+        },
         created() {
             axios
                 .get('https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=bbced225efcd44d680c864f6691b3cd7')
                 .then(response => {
                     this.posts = response.data.articles
+                    this.limitedTwo = response.data.articles
+                    this.limited3 = response.data.articles
                     console.log(response.data.articles)
                 }).catch(err => console.log(err))
         }
