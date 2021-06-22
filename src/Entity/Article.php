@@ -12,7 +12,20 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
- * @ApiResource()
+ * @ApiResource(
+ *     collectionOperations={
+ *          "get"={
+ *              "normalization_context"={
+ *                  "groups"={"read:collection:article"}
+ *              }
+ *          },
+ *          "post"={
+ *              "normalization_context"={
+ *                  "groups"={"read:collection"}
+ *              }
+ *          }
+ *     }
+ * )
  */
 class Article
 {
@@ -20,60 +33,66 @@ class Article
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"read:article"})
+     * @Groups({"read:collection:article"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"read:article"})
+     * @Groups({"read:collection:article"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"read:article"})
+     * @Groups({"read:collection:article"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"read:article"})
+     * @Groups({"read:collection:article"})
      */
     private $url;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"read:article"})
+     * @Groups({"read:collection:article"})
      */
     private $img;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"read:article"})
+     * @Groups({"read:collection:article"})
      */
     private $created_at;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"read:article"})
+     * @Groups({"read:collection:article"})
      */
     private $content;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="articles")
-     *@Groups({"read:article"})
+     *@Groups({"read:collection:article"})
      */
     private $user;
 
     /**
      * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="articles")
+     * @Groups({"read:collection:article"})
      */
     private $categories;
 
+    /*
+     * @Groups({"read:collection:article"})
+    */
+    private $link;
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->link = "/article/".$this->id;
     }
 
     public function getId(): ?int

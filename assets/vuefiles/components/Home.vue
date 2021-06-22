@@ -33,9 +33,9 @@
                 <!-- container flex -->
                 <div class="md:flex ">
                     <!-- article items -->
-                    <div class="flex justify-between mb-5">
-                        <div v-for="(post,key) in limitedTwo" class="relative ml-3">
-                            <div class="h-80 bg-gradient-to-tr from-black">
+                    <div class="flex flex-wrap md:flex-nowrap mb-5">
+                        <div v-for="(post,key) in limitedTwo" class="relative mb-3 w-full md:ml-3">
+                            <div class="h-80 md:w-80 bg-gradient-to-tr from-black">
                                 <img class="h-full w-full object-cover rounded-xl" :src="post.urlToImage" alt="">
                             </div>
                             <span class="absolute top-5 left-5 bg-blue-800 text-white text-sm py-1 px-2 rounded">CODING</span>
@@ -76,29 +76,49 @@
             <div class="w-11/12 mx-auto">
                 <div class="flex flex-wrap md:flex-nowrap ">
                     <!-- posts -->
-                    <div class="md:flex-grow grid sm:grid-cols-2 md:gap-3 gap-5 mb-5 md:w-2/3">
-                        <div class="grid gap-y-3">
+                    <div class="grid sm:grid-cols-2 md:gap-3 gap-5 mb-5 md:w-2/3">
+                        <div class="">
                             <h3 class="text-2xl font-bold">News From NewsApi.org</h3>
-                            <div v-for="(post,key) in limitedTen " class="bg-white relative py-3 px-4">
-                                <div class="h-36 ">
-                                    <img class="w-full h-full object-cover" :src="post.urlToImage" alt="">
-                                </div>
-                                <span class="absolute top-5 left-5 bg-blue-800 text-white py-1 px-2 rounded text-sm">CODING</span>
-                                <div class="">
-                                    <p class="text-xl font-bold"><a :href="post.url"> {{ post.title }}</a></p>
-                                    <p class="text-xs text-gray-400 py-2">
-                                        <span><i class="fa fa-user text-pink-600 mr-1">{{post.author }}</i></span>
-                                        <span><i class="far fa-clock"></i>{{ post.publishedAt }}</span>
-                                    </p>
-                                    <p class="text-gray-500 mb-3">{{ post.description }}</p>
-                                    <a href="" class="py-1 px-3 bg-black text-white">Read More</a>
+                            <div class="grid gap-y-3">
+
+                                <div v-for="(post,key) in limitedTen " class="bg-white relative py-3 px-4">
+                                    <div class="h-36 ">
+                                        <img class="w-full h-full object-cover" :src="post.urlToImage" alt="">
+                                    </div>
+                                    <span class="absolute top-5 left-5 bg-blue-800 text-white py-1 px-2 rounded text-sm">CODING</span>
+                                    <div class="">
+                                        <p class="text-xl font-bold"><a :href="post.url"> {{ post.title }}</a></p>
+                                        <p class="text-xs text-gray-400 py-2">
+                                            <span><i class="fa fa-user text-pink-600 mr-1">{{post.author }}</i></span>
+                                            <span><i class="far fa-clock"></i>{{ post.publishedAt }}</span>
+                                        </p>
+                                        <p class="text-gray-500 mb-3">{{ post.description }}</p>
+                                        <a href="" class="py-1 px-3 bg-black text-white">Read More</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="grid gap-y-3">
-
+                        <div class="">
 <!--                            news from database-->
                             <h3 class="text-2xl font-bold">News From Database</h3>
+                            <div class="grid gap-y-3">
+                                <img src="" alt="">
+                                <div v-for="(post,key) in limitedTenDb " class="bg-white relative py-3 px-4">
+                                    <div class="h-36 ">
+                                        <img class="w-full h-full object-cover" :src="'../components/'+post.img" alt="">
+                                    </div>
+                                    <span v-for="(cat,k) in post.categories" class=" absolute top-5 left-5 text-white py-1 px-2 rounded text-sm">{{cat.nom}}</span>
+                                    <div class="">
+                                        <p class="text-xl font-bold"><a :href="post.url"> {{ post.title }}</a></p>
+                                        <p class="text-xs text-gray-400 py-2">
+                                            <span><i class="fa fa-user text-pink-600 mr-1"></i>{{post.user.pseudo }}</span>
+                                            <span><i class="far fa-clock"></i>{{ post.created_at }}</span>
+                                        </p>
+                                        <p class="text-gray-500 mb-3">{{ post.description }}</p>
+                                        <a href="" class="py-1 px-3 bg-black text-white">Read More</a>
+                                    </div>
+                            </div>
+                            </div>
                         </div>
                     </div>
                     <!-- aside -->
@@ -285,7 +305,8 @@
                 posts : [],
                 limited2 : [],
                 limited3 : [],
-                limited10 : []
+                limited10 : [],
+                limited10Db : []
             }
         },
         computed : {
@@ -297,12 +318,20 @@
             },
             limitedTen () {
                 return this.limited10.slice(0,10)
+            },
+            limitedTenDb(){
+                return this.limited10Db.slice(0,10)
             }
         },
-        created() {
+        mounted() {
+            axios.get('admin/api/articles')
+                .then(response => {
+                    console.log(response.data["hydra:member"])
+                    this.limited10Db = response.data["hydra:member"]
+                })
+                .catch(error => console.log(error));
             axios.get('https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=bbced225efcd44d680c864f6691b3cd7')
                 .then(resp => {
-                    console.log(resp.data.articles)
                     this.posts = resp.data.articles
                     this.limited2 = resp.data.articles
                     this.limited3 = resp.data.articles
