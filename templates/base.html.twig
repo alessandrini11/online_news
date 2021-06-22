@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
               integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
               crossorigin="anonymous" />
-        <title>OnlineNews{% block title %}{% endblock %}</title>
+        <title>OnlineNews {% block title %}{% endblock %}</title>
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
@@ -34,7 +34,9 @@
             </div>
         </div>
     </nav>
-        {% block body %}{% endblock %}
+        <div id="app">
+            {% block body %}{% endblock %}
+        </div>
     <footer class="bg-blue-900 py-5">
         <div class="w-11/12">
             <div class=" text-white text-xs sm:flex sm:justify-between">
