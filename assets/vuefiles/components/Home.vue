@@ -105,7 +105,7 @@
                                 <img src="" alt="">
                                 <div v-for="(post,key) in limitedTenDb " class="bg-white relative py-3 px-4">
                                     <div class="h-36 ">
-                                        <img class="w-full h-full object-cover" :src="'../components/'+post.img" alt="">
+                                        <img class="w-full h-full object-cover" src="../../../assets/vuefiles/components/1.jpg" alt="">
                                     </div>
                                     <span v-for="(cat,k) in post.categories" class=" absolute top-5 left-5 text-white py-1 px-2 rounded text-sm">{{cat.nom}}</span>
                                     <div class="">
@@ -324,7 +324,7 @@
             }
         },
         mounted() {
-            axios.get('admin/api/articles')
+            axios.get('admin/api/article')
                 .then(response => {
                     console.log(response.data["hydra:member"])
                     this.limited10Db = response.data["hydra:member"]

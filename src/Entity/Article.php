@@ -17,7 +17,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "get"={
  *              "normalization_context"={
  *                  "groups"={"read:collection:article"}
- *              }
+ *              },
+ *              "path" = "/article"
  *          },
  *          "post"={
  *              "normalization_context"={
