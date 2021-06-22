@@ -1,32 +1,6 @@
 <template>
     <div class="">
-        <header class="bg-white h-32 py-5">
-            <div class="w-11/12 mx-auto h-full">
-                <a href="" class="hidden"><span>ONLINE</span> BLOG</a>
-                <div class="h-full flex items-center justify-center border-gray-400 bg-red-500">
-                    <h3 class=" text-2xl font-bold text-white mr-5">Breaking News</h3>
-                    <p class="text-gray-800 text-xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt, natus?</p>
-                </div>
-            </div>
-        </header>
-        <nav class="bg-black ">
-            <div class="w-11/12 mx-auto">
-                <div class="flex justify-between">
-                    <div class="text-white text-xl cursor-pointer py-4">
-                        <i class="fa fa-bars"></i>
-                    </div>
-                    <div class="text-white text-2xl py-4">
-                        <p><span class="font-bold">ONLINE</span>BLOG</p>
-                    </div>
-                    <div class="text-white text-xl cursor-pointer py-4">
-                        <i class="fa fas fa-search"></i>
-                    </div>
-                    <div class="hidden">
-                        form
-                    </div>
-                </div>
-            </div>
-        </nav>
+
         <section class="">
             <!-- container -->
             <div class="w-11/12 mx-auto pt-5">
@@ -105,9 +79,9 @@
                                 <img src="" alt="">
                                 <div v-for="(post,key) in limitedTenDb " class="bg-white relative py-3 px-4">
                                     <div class="h-36 ">
-                                        <img class="w-full h-full object-cover" src="../../../assets/vuefiles/components/1.jpg" alt="">
+                                        <img class="w-full h-full object-cover" :src="post.img" alt="">
                                     </div>
-                                    <span v-for="(cat,k) in post.categories" class=" absolute top-5 left-5 text-white py-1 px-2 rounded text-sm">{{cat.nom}}</span>
+                                    <span v-for="(cat,k) in post.categories" class=" absolute bg-blue-800 top-5 left-5 text-white py-1 px-2 rounded text-sm">{{cat.nom}}</span>
                                     <div class="">
                                         <p class="text-xl font-bold"><a :href="post.url"> {{ post.title }}</a></p>
                                         <p class="text-xs text-gray-400 py-2">
@@ -324,9 +298,8 @@
             }
         },
         mounted() {
-            axios.get('admin/api/article')
+            axios.get('/admin/api/article')
                 .then(response => {
-                    console.log(response.data["hydra:member"])
                     this.limited10Db = response.data["hydra:member"]
                 })
                 .catch(error => console.log(error));

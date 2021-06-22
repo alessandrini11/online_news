@@ -7,14 +7,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class ArticleApiController
+ * @package App\Controller
+ * @Route("/admin/articleapi")
+ */
 class ArticleApiController extends AbstractController
 {
     /**
-     * @Route("/api/article", name="article_api",methods={"GET"})
+     * @Route("/" ,name="article_api")
      */
     public function index(ArticleRepository $repo ): Response
     {
-        return $this->json($repo->findAll(),200,[],['groups' =>'article:read']);
-
+       return $this->render('article_api/index.html.twig');
     }
 }

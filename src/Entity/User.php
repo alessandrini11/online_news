@@ -11,7 +11,20 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @ApiResource()
+ * @ApiResource(
+ *     collectionOperations={
+ *          "get"={
+ *              "normalization_context"={
+ *                  "groups"={"read:collection:user"}
+ *              }
+ *          },
+ *          "post"={
+ *              "normalization_context"={
+ *                  "groups"={}
+ *              }
+ *          }
+ *     }
+ * )
  */
 class User
 {
@@ -19,29 +32,33 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"read:collection:article"})
+     * @Groups({"read:collection:article","read:collection:user"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:collection:user"})
      *
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"read:collection:article"})
+     * @Groups({"read:collection:article","read:collection:user"})
      */
     private $pseudo;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:collection:user"})
      */
     private $password;
 
     /**
      * @ORM\OneToMany(targetEntity=Article::class, mappedBy="user")
+     * @Groups({"read:collection:user"})
+     *
      */
     private $articles;
 

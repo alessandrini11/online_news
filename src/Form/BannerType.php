@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Banner;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,7 +14,7 @@ class BannerType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('color')
+            ->add('color',ColorType::class)
         ;
     }
 

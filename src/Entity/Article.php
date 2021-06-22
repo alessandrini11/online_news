@@ -21,8 +21,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *              "path" = "/article"
  *          },
  *          "post"={
- *              "normalization_context"={
- *                  "groups"={"read:collection"}
+ *              "denormalization_context"={
+ *                  "groups"={"post:collection:article"}
  *              }
  *          }
  *     }
@@ -34,66 +34,67 @@ class Article
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"read:collection:article"})
+     * @Groups({"read:collection:article","post:collection:article"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"read:collection:article"})
+     * @Groups({"read:collection:article","post:collection:article"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"read:collection:article"})
+     * @Groups({"read:collection:article","post:collection:article"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"read:collection:article"})
+     * @Groups({"read:collection:article","post:collection:article"})
      */
     private $url;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"read:collection:article"})
+     * @Groups({"read:collection:article","post:collection:article"})
      */
     private $img;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"read:collection:article"})
+     * @Groups({"read:collection:article","post:collection:article"})
      */
     private $created_at;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"read:collection:article"})
+     * @Groups({"read:collection:article","post:collection:article"})
      */
     private $content;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="articles")
-     *@Groups({"read:collection:article"})
+     *@Groups({"read:collection:article","post:collection:article"})
      */
     private $user;
 
     /**
      * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="articles")
-     * @Groups({"read:collection:article"})
+     * @Groups({"read:collection:article","post:collection:article"})
      */
     private $categories;
 
     /*
-     * @Groups({"read:collection:article"})
+     * @Groups({"read:collection:article","post})
     */
     private $link;
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->link = "/article/".$this->id;
+        $this->created_at = new \DateTime();
     }
 
     public function getId(): ?int
