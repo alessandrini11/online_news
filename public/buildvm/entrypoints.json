@@ -1,0 +1,14 @@
+{
+  "entrypoints": {
+    "app": {
+      "js": [
+        "/buildvm/runtime.js",
+        "/buildvm/vendors-node_modules_axios_index_js-node_modules_core-js_modules_es_symbol_description_js-nod-51f4a2.js",
+        "/buildvm/app.js"
+      ],
+      "css": [
+        "/buildvm/app.css"
+      ]
+    }
+  }
+}

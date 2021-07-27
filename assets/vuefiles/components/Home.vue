@@ -30,7 +30,7 @@
                                 </div>
                                 <div class="bg-white pl-5">
                                     <p class="font-bold"><a :href="post.url">{{ post.title.substr(0,50) }}</a>...</p>
-                                    <p class="text-gray-400 text-sm"><i class="far fa-clock mr-1 text-pink-700"></i>date</p>
+                                    <p class="text-gray-400 text-sm"><i class="far fa-clock mr-1 text-pink-700"></i>{{post.creadted_at}}</p>
                                 </div>
                             </div>
                         </div>

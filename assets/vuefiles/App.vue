@@ -3,7 +3,7 @@
 </template>
 
 <script>
-    import Home from './components/Home'
+    import Home from './components/Lool'
     export default {
         name: "App",
         components : {
